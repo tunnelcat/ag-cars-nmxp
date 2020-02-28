@@ -2,12 +2,20 @@
 # what about duplicated inserts of qualities?
 # what will happen if car1->ap1->car2 and car2->ap1->car1 (inserts quality twice?)
 
+exploit opensmtpd_exploit_alternate(machine)=
+	preconditions:
+		quality:machine,opensmtpd=enabled;
+		quality:machine,opensmtpd_version==66.2;
+	postconditions:
+		insert quality:machine,remote_execution=true;
+.
+
 # done
 exploit opensmtpd_exploit(machine1, machine2)=
 	preconditions:
-		topology:machine1->machine2,connected;
 		quality:machine2,opensmtpd=enabled;
-		quality:machine2,opensmtpd_version==6.6.2;
+		quality:machine2,opensmtpd_version==66.2;
+		topology:machine1->machine2,connected;
 	postconditions:
 		insert quality:machine2,remote_execution=true;
 .
@@ -15,7 +23,7 @@ exploit opensmtpd_exploit(machine1, machine2)=
 # done, not sure if viable IRL
 exploit kernel_exploit(machine)=
 	preconditions:
-		quality:machine,kernel_version==4.4.9;
+		quality:machine,kernel_version==44.9;
 	postconditions:
 		insert quality:machine,priv_esc=true;
 .
@@ -23,7 +31,8 @@ exploit kernel_exploit(machine)=
 # maybe change to have machine1, machine2 parameters? (see alternate below)
 exploit apache_exploit(machine)=
 	preconditions:
-		quality:machine,apache_version==2.4.10;
+		quality:machine,apache=enabled;
+		quality:machine,apache_version==24.10;
 	postconditions:
 		insert quality:machine,dos=true;
 .
@@ -32,7 +41,7 @@ exploit apache_exploit(machine)=
 exploit apache_exploit_alternate(machine1, machine2)=
 	preconditions:
 		topology:machine1->machine2,connected;
-		quality:machine2,apache_version==2.4.10;
+		quality:machine2,apache_version==24.10;
 	postconditions:
 		insert quality:machine2,dos=true;
 .
