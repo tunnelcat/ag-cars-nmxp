@@ -1,0 +1,43 @@
+# PCs connect to car's hotspot, cars connect to AP for internet.
+# PC->Car->AP
+network model =
+    assets:
+        # Router
+        ap1;
+
+        # Cars (assuming identical software)
+        car1; 
+        car2;
+
+        # Laptops
+        pc1; 
+        pc2; 
+
+    facts:
+    	# careful with the = and := difference
+        quality:car1,os=debian;
+        quality:car1,os_version:=4.9.2;
+        quality:car1,kernel_version:=4.4.9;
+        quality:car1,opensmtpd=enabled;
+        quality:car1,opensmtpd_version:=6.6.2;
+        quality:car1,apache=enabled;
+        quality:car1,apache_version:=2.4.10;
+
+        quality:car2,os=debian;
+        quality:car2,os_version:=4.9.2;
+        quality:car2,kernel_version:=4.4.9;
+        quality:car2,opensmtpd=enabled;
+        quality:car2,opensmtpd_version:=6.6.2;
+        quality:car2,apache=enabled;
+        quality:car2,apache_version:=2.4.10;
+
+        topology:ap1<->car1,connected;
+
+        topology:ap1<->car2,connected;
+
+        topology:car1<->pc1,connected;
+
+        topology:car2<->pc2,connected;
+
+    tags:
+.

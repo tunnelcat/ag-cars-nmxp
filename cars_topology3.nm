@@ -1,0 +1,31 @@
+# Skeleton Model without duplicates 
+# PC->AP->Car
+network model =
+    assets:
+        # Router
+        ap;
+
+        # Cars (assuming identical software)
+        car;
+
+        # Laptops
+        pc; 
+
+    facts:
+        # careful with the = and := difference
+        # version numbers like 1.2.30 -> 12.30 (for float compatibility)
+        quality:car,os=debian;
+        quality:car,os_version:=49.2;
+        quality:car,kernel_version:=44.9;
+        quality:car,opensmtpd=enabled;
+        quality:car,opensmtpd_version:=66.2;
+        quality:car,apache=enabled;
+        quality:car,apache_version:=24.10;
+
+        topology:pc<->ap,connected;
+
+        topology:ap<->car,connected;
+
+
+    tags:
+.

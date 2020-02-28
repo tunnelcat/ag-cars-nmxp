@@ -1,0 +1,56 @@
+# careful with the = and == difference
+# what about duplicated inserts of qualities?
+# what will happen if car1->ap1->car2 and car2->ap1->car1 (inserts quality twice?)
+
+# done
+exploit opensmtpd_exploit(machine1, machine2)=
+	preconditions:
+		topology:machine1->machine2,connected;
+		quality:machine2,opensmtpd=enabled;
+		quality:machine2,opensmtpd_version==6.6.2;
+	postconditions:
+		insert quality:machine2,remote_execution=true;
+.
+
+# done, not sure if viable IRL
+exploit kernel_exploit(machine)=
+	preconditions:
+		quality:machine,kernel_version==4.4.9;
+	postconditions:
+		insert quality:machine,priv_esc=true;
+.
+
+# maybe change to have machine1, machine2 parameters? (see alternate below)
+exploit apache_exploit(machine)=
+	preconditions:
+		quality:machine,apache_version==2.4.10;
+	postconditions:
+		insert quality:machine,dos=true;
+.
+
+# apache_exploit with machine1, machine2 parameters:
+exploit apache_exploit_alternate(machine1, machine2)=
+	preconditions:
+		topology:machine1->machine2,connected;
+		quality:machine2,apache_version==2.4.10;
+	postconditions:
+		insert quality:machine2,dos=true;
+.
+
+# done
+exploit root_remote_execution(machine)=
+	preconditions:
+		quality:machine,priv_esc=true;
+		quality:machine,remote_execution=true;
+	postconditions:
+		insert quality:machine,root=true;
+.
+
+# is this needed? (it is a small network model...might not need pivoting at all) 
+exploit pivot(machine1, machine2)=
+	preconditions:
+		topology:machine1->machine2,connected;
+		quality:machine1=root;
+	postconditions:
+		insert quality:machine2,root=true;
+.
