@@ -1,3 +1,5 @@
+# Simple skeleton exploit model (designed for skeleton topology 3, but can be used for others)
+
 # careful with the = and == difference
 # what about duplicated inserts of qualities?
 # what will happen if car1->ap1->car2 and car2->ap1->car1 (inserts quality twice?)
