@@ -1,4 +1,5 @@
-# 2 PCs and 2 Cars connected to same AP 
+# Ferdinand Mudjialim, 2020/04/01
+# 2 PCs and 2 Cars connected to same AP
 # PC->AP, Car->AP
 
 # careful with the = and := difference
@@ -10,28 +11,30 @@ network model =
         ap;
 
         # Cars (assuming identical software)
-        car1; 
+        car1;
         car2;
 
         # Laptops
-        pc1; 
-        pc2; 
+        pc1;
+        pc2;
 
     facts:
     	quality:car1,kernel_version:=44.9;
-        quality:car1,opensmtpd=enabled;
+        #quality:car1,opensmtpd=enabled;
         quality:car1,opensmtpd_version:=66.2;
-        quality:car1,apache=enabled;
+        #quality:car1,apache=enabled;
         quality:car1,apache_version:=24.10;
+        quality:car1,rsh=enabled;
 
-		quality:car2,kernel_version:=44.9;
-        quality:car2,opensmtpd=enabled;
+	quality:car2,kernel_version:=44.9;
+        #quality:car2,opensmtpd=enabled;
         quality:car2,opensmtpd_version:=66.2;
-        quality:car2,apache=enabled;
+        #quality:car2,apache=enabled;
         quality:car2,apache_version:=24.10;
+        quality:car2,rsh=enabled;
 
         topology:ap<->pc1,connected;
-        
+
         topology:ap<->pc2,connected;
 
         topology:ap<->car1,connected;

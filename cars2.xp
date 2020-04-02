@@ -1,25 +1,26 @@
+# Ferdinand Mudjialim, 2020/04/01
 # Exploit model with some alternate exploit definitions (designed for topologies 1 and 2, but can be used for others)
 
 # careful with the = and == difference
 # what about duplicated inserts of qualities?
 # what will happen if car1->ap1->car2 and car2->ap1->car1 (inserts quality twice?)
 
-# exploit opensmtpd_exploit_alternate(machine)=
-# 	preconditions:
-# 		quality:machine,opensmtpd=enabled;
-# 		quality:machine,opensmtpd_version==66.2;
-# 	postconditions:
-# 		insert quality:machine,remote_execution=true;
-# .
-
-exploit opensmtpd_exploit(machine1, machine2)=
+exploit opensmtpd_exploit_alternate(machine)=
 	preconditions:
-		quality:machine2,opensmtpd=enabled;
-		quality:machine2,opensmtpd_version==66.2;
-		topology:machine1->machine2,connected;
+		quality:machine,opensmtpd=enabled;
+		quality:machine,opensmtpd_version==66.2;
 	postconditions:
-		insert quality:machine2,remote_execution=true;
+		insert quality:machine,remote_execution=true;
 .
+
+# exploit opensmtpd_exploit(machine1, machine2)=
+# 	preconditions:
+# 		quality:machine2,opensmtpd=enabled;
+# 		quality:machine2,opensmtpd_version==66.2;
+# 		topology:machine1->machine2,connected;
+# 	postconditions:
+# 		insert quality:machine2,remote_execution=true;
+# .
 
 exploit kernel_exploit(machine)=
 	preconditions:
@@ -52,11 +53,12 @@ exploit root_remote_execution(machine)=
 		insert quality:machine,root=true;
 .
 
-# is this needed? (it is a small network model...might not need pivoting at all) 
-exploit pivot(machine1, machine2)=
-	preconditions:
-		topology:machine1->machine2,connected;
-		quality:machine1,root=true;
-	postconditions:
-		insert quality:machine2,root=true;
-.
+# is this needed? (it is a small network model...might not need pivoting at all)
+# pivot not working atm
+# exploit pivot(machine1, machine2)=
+# 	preconditions:
+# 		topology:machine1->machine2,connected;
+# 		quality:machine1,root=true;
+# 	postconditions:
+# 		insert quality:machine2,root=true;
+# .
