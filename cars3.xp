@@ -1,9 +1,8 @@
 # Ferdinand Mudjialim, 2020/04/01
-# Simple skeleton exploit model (designed for skeleton topology 3, but can be used for others)
+# Simple exploit model (designed for cars3, but can be used for others)
 
 # careful with the = and == difference
-# what about duplicated inserts of qualities?
-# what will happen if car1->ap1->car2 and car2->ap1->car1 (inserts quality twice?)
+# version numbers like 1.2.30 converted to 12.30 (for float compatibility)
 
 exploit kernel_exploit(machine)=
 	preconditions:
@@ -14,7 +13,6 @@ exploit kernel_exploit(machine)=
 
 exploit apache_exploit(machine)=
 	preconditions:
-		#quality:machine,apache=enabled;
 		quality:machine,apache_version==24.10;
 	postconditions:
 		insert quality:machine,dos=true;
@@ -37,7 +35,6 @@ exploit root_remote_execution(machine)=
 
 exploit opensmtpd_exploit(machine1, machine2)=
 	preconditions:
-		#quality:machine2,opensmtpd=enabled;
 		quality:machine2,opensmtpd_version==66.2;
 		topology:machine1->machine2,connected;
 	postconditions:
