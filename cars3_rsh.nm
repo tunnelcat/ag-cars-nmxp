@@ -20,7 +20,7 @@ network model =
         quality:car,kernel_version:=44.9;
         quality:car,opensmtpd_version:=66.2;
         quality:car,apache_version:=24.10;
-        # quality:car,rsh=enabled;
+        quality:car,rsh=enabled;
 
     	topology:ap<->car,connected;
 

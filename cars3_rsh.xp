@@ -18,12 +18,12 @@ exploit apache_exploit(machine)=
 		insert quality:machine,dos=true;
 .
 
-#exploit rsh_mitm(machine)=
-#	preconditions:
-#		quality:machine,rsh=enabled;
-#	postconditions:
-#		insert quality:machine,mitm=true;
-#.
+exploit rsh_mitm(machine)=
+	preconditions:
+		quality:machine,rsh=enabled;
+	postconditions:
+		insert quality:machine,mitm=true;
+.
 
 exploit root_remote_execution(machine)=
 	preconditions:
