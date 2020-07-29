@@ -23,7 +23,6 @@ network model =
         quality:car,rsh=enabled;
 
     	topology:ap<->car,connected;
-
         topology:ap<->pc,connected;
 
     tags:
